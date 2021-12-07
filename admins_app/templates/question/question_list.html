@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load mytags %}
+{% block title %}
+    Question List
+{% endblock %}
+
+
+{% block content %}
+    <p class="h4">{{ total }}</p>
+    <div class="row">
+        <form>
+            <div class="offset-1 col-10">
+                <div class="row align-items-center">
+                    <div class="col-3">
+                        <input type="text" class="form-control" name="search" id="search" placeholder="search...">
+                    </div>
+                    <div class="col-2">
+                        <select name="category_filter" class="form-control" id="category_filter">
+                            <option value="" hidden>Category</option>
+                            {% for category in categories %}
+                                <option value="{{ category.code }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-2">
+                        <select name="level_filter" class="form-control" id="level_filter">
+                            <option value="" hidden>Level</option>
+                            {% for level in levels %}
+                                <option value="{{ level.code }}">{{ level.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-2">
+                        <select name="lang_filter" class="form-control" id="lang_filter">
+                            <option value="" hidden>Language</option>
+                            {% for lang in langs %}
+                                <option value="{{ lang.code }}">{{ lang.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Question</th>
+            <th scope="col">Category</th>
+            <th scope="col">Level</th>
+            <th scope="col">Lang</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <th scope="row"> {{ questions.number|gen_id:forloop.counter }}</th>
+                <td>{{ question.question|slice:100 }}...</td>
+                <td>{{ question.category }}</td>
+                <td>{{ question.level }}</td>
+                <td>{{ question.lang }}</td>
+                <td>
+                    <a class="btn btn-secondary" href="{% url 'admins:quiz-update' question.id %}">Update</a>
+                    <a class="btn btn-danger" href="{% url 'admins:quiz-delete' question.id %}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if questions.paginator.page_range %}
+        <nav aria-label="Page navigation example">
+
+            <ul class="pagination">
+                {% if questions.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ questions.previous_page_number }}"
+                           aria-label="Previous">
+                            Previous
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            Previous
+                        </a>
+                    </li>
+                {% endif %}
+
+
+                {% for page in questions.paginator.page_range %}
+                    {% if questions.number == page %}
+                        <li class="page-item active">
+                            <a aria-current="page" class="page-link" href="?page={{ page }}">{{ page }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if questions.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ questions.next_page_number }}" aria-label="Next">
+                            Next
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Next">
+                            Next
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </nav>
+    {% endif %}
+{% endblock %}
+
+

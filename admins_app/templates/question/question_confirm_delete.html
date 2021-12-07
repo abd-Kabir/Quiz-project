@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+    Delete question
+{% endblock title %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <p>Are you sure want to delete this question?</p>
+        <h3>
+            {{ question }}
+        </h3>
+
+        <a href="{% url 'admins:question_list' %}" class="btn btn-primary">Go back</a>
+        <input type="submit" value="Delete" class="btn btn-danger">
+    </form>
+{% endblock content %}
+

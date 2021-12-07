@@ -1,0 +1,17 @@
+.update-question input{
+            padding: 10px;
+            box-sizing: border-box;
+            outline: none !important;
+            width: 100%;
+            border: 1px solid grey;
+            border-radius: 5px;
+        }
+
+.update-question select{
+             border: 1px solid grey;
+            border-radius: 5px;
+            padding: 10px;
+            box-sizing: border-box;
+            outline: none;
+            width: 100%;
+        }

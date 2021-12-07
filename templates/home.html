@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+{% block content %}
+    <h1>{{ emoji }}</h1>
+    {% if user.is_authenticated %}
+        <h1>Welcome {{ user.username }}</h1>
+    {% else %}
+        <h2>Please Sign</h2>
+    {% endif %}
+{% endblock %}
+

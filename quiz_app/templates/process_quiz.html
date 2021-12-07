@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+
+
+{% block title %}
+    Solve Quiz
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="offset-3 col-6">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        {{ question }}
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for option in options %}
+                            <li class="list-group-item">{{ option.answer }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="card-footer bg-light align-center">
+{#                        <a href="{{ current_id }}" class="btn btn-success">Back</a>#}
+                        <a href="{{ current_id|add:1 }}" class="btn btn-success">Next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+

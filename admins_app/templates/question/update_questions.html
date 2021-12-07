@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+    Update title
+{% endblock title %}
+
+{% block content %}
+    <div class="row  update-question ">
+        <div class="col-10 offset-1">
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="{{ form.category.id_for_label }}" class="form-label">{{ form.category.label }}</label>
+                    {{ form.category }}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.level.id_for_label }}" class="form-label">{{ form.level.label }}</label>
+                    {{ form.level }}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.lang.id_for_label }}" class="form-label">{{ form.lang.label }}</label>
+                    {{ form.lang }}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.question.id_for_label }}" class="form-label">{{ form.question.label }}</label>
+                    {{ form.question }}
+                </div>
+                <a href="{% url 'admins:question_list' %}" class="btn btn-primary">Go back</a>
+                <input type="submit" value="Update" class="btn btn-success " style="width: 100px;margin: 20px auto">
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+
